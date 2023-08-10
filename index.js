@@ -4,17 +4,24 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 
+// Importing Routes
+const userRoutes = require("./routes/userRoutes");
+
+// Express Server Config
 const app = express();
 dotenv.config();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors);
+app.use(cors());
+
+app.use("/newUser", userRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello! Welcome to blog backend");
 });
 
+//  Database connection and setting up server to listen
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
