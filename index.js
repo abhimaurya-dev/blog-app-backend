@@ -1,11 +1,14 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-const cors = require("cors");
+import express from "express";
+import bodyParser from "body-parser";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import cors from "cors";
 
 // Importing Routes
-const userRoutes = require("./routes/userRoutes");
+import userRoutes from "./routes/userRoutes.js";
+
+//Importing Middlewares
+import { errorMiddleware } from "./middlewares/errorHandler/errorMiddleware.js";
 
 // Express Server Config
 const app = express();
@@ -15,11 +18,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
+// Using routes
 app.use("/newUser", userRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello! Welcome to blog backend");
 });
+
+//Using middlewares
+app.use(errorMiddleware);
 
 //  Database connection and setting up server to listen
 mongoose

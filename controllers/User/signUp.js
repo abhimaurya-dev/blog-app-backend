@@ -1,22 +1,20 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const User = require("../../model/userModel");
+import express from "express";
+import mongoose from "mongoose";
 
-const signUp = async (req, res) => {
+import User from "../../model/userModel.js";
+
+const signUp = async (req, res, next) => {
   const userInputData = req.body;
-  const newUser = new User(userInputData);
   try {
+    const newUser = new User(userInputData);
     await newUser.save();
     return res.status(201).json({
       success: true,
       user: newUser,
     });
   } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    return next(error);
   }
 };
 
-module.exports = signUp;
+export default signUp;
