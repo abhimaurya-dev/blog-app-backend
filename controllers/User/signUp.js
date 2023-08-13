@@ -1,9 +1,6 @@
-import express from "express";
-import mongoose from "mongoose";
-
 import User from "../../model/userModel.js";
 
-const signUp = async (req, res, next) => {
+export const signUp = async (req, res, next) => {
   const userInputData = req.body;
   try {
     const newUser = new User(userInputData);
@@ -16,5 +13,3 @@ const signUp = async (req, res, next) => {
     return next(error);
   }
 };
-
-export default signUp;

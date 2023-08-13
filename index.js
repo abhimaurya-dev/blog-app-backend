@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Using routes
-app.use("/newUser", userRoutes);
+app.use("/user", userRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello! Welcome to blog backend");
@@ -30,9 +30,11 @@ app.use(errorMiddleware);
 
 //  Database connection and setting up server to listen
 mongoose
+  // eslint-disable-next-line no-undef
   .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log("Connected to database");
+    // eslint-disable-next-line no-undef
     app.listen(process.env.PORT || 5000, (err) => {
       if (err) {
         return console.log({
@@ -40,6 +42,7 @@ mongoose
           message: err,
         });
       }
+      // eslint-disable-next-line no-undef
       console.log(`Listening on port ${process.env.PORT}`);
     });
   })
