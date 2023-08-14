@@ -5,6 +5,8 @@ export const signUp = async (req, res, next) => {
   try {
     const newUser = new User(userInputData);
     await newUser.save();
+    const authToken = await newUser.generateAuthToken();
+    res.cookie("jwt", authToken);
     return res.status(201).json({
       success: true,
       user: newUser,
