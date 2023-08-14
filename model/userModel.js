@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 const SALT_WORK_FACTOR = 10;
 
@@ -24,7 +25,25 @@ const userSchema = new mongoose.Schema({
   profilePhoto: {
     type: String,
   },
+  token: {
+    type: String,
+  },
 });
+
+userSchema.methods.generateAuthToken = async function (next) {
+  try {
+    const authToken = jwt.sign(
+      { id: this._id.toString() },
+      // eslint-disable-next-line no-undef
+      process.env.SECRET_CODE
+    );
+    this.token = authToken;
+    await this.save();
+    return authToken;
+  } catch (error) {
+    return next(error);
+  }
+};
 
 userSchema.pre("save", function (next) {
   var user = this;

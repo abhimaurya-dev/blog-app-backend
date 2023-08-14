@@ -16,6 +16,8 @@ export const login = async (req, res, next) => {
     if (!passwordMatch) {
       return next(new ErrorHandler("Invalid Username or Password", 403));
     }
+    const authToken = await usernameExist.generateAuthToken();
+    res.cookie("jwt", authToken);
     res.status(200).json({
       success: true,
       message: "Successful login",
