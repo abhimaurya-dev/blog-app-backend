@@ -1,6 +1,4 @@
-// eslint-disable-next-line no-unused-vars
 export const errorMiddleware = (err, req, res, next) => {
-  // console.log(err);
   err.message = err.message || "Internal Server Error";
   err.statusCode = err.statusCode || 500;
   if (err.name === "ValidationError") {
@@ -15,4 +13,5 @@ export const errorMiddleware = (err, req, res, next) => {
     success: false,
     message: err.message,
   });
+  next();
 };
