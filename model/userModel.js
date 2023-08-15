@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema({
 userSchema.methods.generateAuthToken = async function (next) {
   try {
     const authToken = jwt.sign(
-      { id: this._id.toString() },
+      { userId: this._id },
       // eslint-disable-next-line no-undef
       process.env.SECRET_CODE
     );
