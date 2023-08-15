@@ -5,7 +5,9 @@ import bcrypt from "bcryptjs";
 export const logInUserController = async (req, res, next) => {
   try {
     const { username, password } = req.body;
-    const usernameExist = await User.findOne({ username: username });
+    const usernameExist = await User.findOne({ username: username }).select(
+      "+password"
+    );
     if (!usernameExist) {
       return next(new ErrorHandler("Invalid Username or Password", 403));
     }
