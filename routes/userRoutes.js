@@ -1,15 +1,17 @@
 import express from "express";
-import { signUp as signUpController } from "../controllers/User/signUp.js";
-import { login as loginController } from "../controllers/User/login.js";
-import { logOut as logOutController } from "../controllers/User/logOut.js";
-import { isLoggedIn } from "../middlewares/userMiddlewares/isLoggedInMiddleware.js";
+import { signUpUserController } from "../controllers/User/signUpUserController.js";
+import { logInUserController } from "../controllers/User/logInUserController.js";
+import { logOutUserController } from "../controllers/User/logOutUserController.js";
+import { isUserLoggedIn } from "../middlewares/userMiddlewares/isUserLoggedInMiddleware.js";
+import { updateUserController } from "../controllers/User/updateUserController.js";
 
 // creating express router instance
 const router = express.Router();
 
 // user routes
-router.post("/SignUp", signUpController);
-router.post("/login", loginController);
-router.post("/logout", isLoggedIn, logOutController);
+router.post("/SignUp", signUpUserController);
+router.post("/login", logInUserController);
+router.post("/logout", isUserLoggedIn, logOutUserController);
+router.put("/update", isUserLoggedIn, updateUserController);
 
 export default router;

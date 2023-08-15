@@ -2,7 +2,7 @@ import User from "../../model/userModel.js";
 import ErrorHandler from "../../utils/errorHandler.js";
 import bcrypt from "bcryptjs";
 
-export const login = async (req, res, next) => {
+export const logInUserController = async (req, res, next) => {
   try {
     const { username, password } = req.body;
     const usernameExist = await User.findOne({ username: username });

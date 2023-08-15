@@ -1,6 +1,6 @@
 import User from "../../model/userModel.js";
 
-export const signUp = async (req, res, next) => {
+export const signUpUserController = async (req, res, next) => {
   const userInputData = req.body;
   try {
     const newUser = new User(userInputData);
