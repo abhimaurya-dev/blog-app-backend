@@ -8,7 +8,7 @@ export const logOutUserController = async (req, res, next) => {
     return next(new ErrorHandler("User Already logged Out", 403));
   }
   try {
-    await res.clearCookie("jwt");
+    await res.clearCookie("jwt-token");
     await User.findByIdAndUpdate(
       { _id: req.userId },
       { token: "" },

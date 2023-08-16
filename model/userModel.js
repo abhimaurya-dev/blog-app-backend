@@ -37,12 +37,15 @@ userSchema.methods.generateAuthToken = async function (next) {
     const authToken = jwt.sign(
       { userId: this._id },
       // eslint-disable-next-line no-undef
-      process.env.SECRET_CODE
+      process.env.SECRET_CODE,
+      // eslint-disable-next-line no-undef
+      { expiresIn: process.env.TOKEN_EXPIRATION_AGE.toString() }
     );
     this.token = authToken;
     await this.save();
     return authToken;
   } catch (error) {
+    console.log(error);
     return next(error);
   }
 };
