@@ -7,6 +7,8 @@ import cookieParser from "cookie-parser";
 
 // Importing Routes
 import userRoutes from "./routes/userRoutes.js";
+import postRoutes from "./routes/postRoutes.js";
+import categoryRoutes from "./routes/categoryRoutes.js";
 
 //Importing Middlewares
 import { errorMiddleware } from "./middlewares/errorHandler/errorMiddleware.js";
@@ -22,6 +24,8 @@ app.use(cors());
 
 // Using routes
 app.use("/user", userRoutes);
+app.use("/post", postRoutes);
+app.use("/category", categoryRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello! Welcome to blog backend");
