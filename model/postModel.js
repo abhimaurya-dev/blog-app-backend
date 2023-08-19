@@ -9,11 +9,11 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  author_id: {
+  author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-  category_id: {
+  category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Category",
   },

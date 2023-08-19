@@ -15,8 +15,8 @@ export const createPostController = async (req, res, next) => {
     const newPost = new Post({
       title,
       content,
-      category_id: categoryId,
-      author_id: userId,
+      category: categoryId,
+      author: userId,
     });
     await newPost.save();
     res.status(201).json({
