@@ -17,10 +17,16 @@ import { errorMiddleware } from "./middlewares/errorHandler/errorMiddleware.js";
 const app = express();
 dotenv.config();
 
+const corsOptions = {
+  origin: "http://localhost:5173",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(cors(corsOptions));
 
 // Using routes
 app.use("/user", userRoutes);

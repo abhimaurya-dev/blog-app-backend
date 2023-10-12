@@ -4,21 +4,16 @@ import bcrypt from "bcryptjs";
 
 export const logInUserController = async (req, res, next) => {
   try {
-    const { username, password } = req.body;
-    const usernameExist = await User.findOne({ username: username }).select(
-      "+password"
-    );
-    if (!usernameExist) {
+    const { email, password } = req.body;
+    const emailExist = await User.findOne({ email: email }).select("+password");
+    if (!emailExist) {
       return next(new ErrorHandler("Invalid Username or Password", 403));
     }
-    const passwordMatch = await bcrypt.compare(
-      password,
-      usernameExist.password
-    );
+    const passwordMatch = await bcrypt.compare(password, emailExist.password);
     if (!passwordMatch) {
       return next(new ErrorHandler("Invalid Username or Password", 403));
     }
-    const authToken = await usernameExist.generateAuthToken();
+    const authToken = await emailExist.generateAuthToken();
     res.cookie("jwt-token", authToken, {
       httpOnly: true,
       // eslint-disable-next-line no-undef
