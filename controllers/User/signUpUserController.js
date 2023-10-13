@@ -11,6 +11,7 @@ export const signUpUserController = async (req, res, next) => {
       // eslint-disable-next-line no-undef
       maxAge: process.env.TOKEN_EXPIRATION_AGE,
     });
+    delete newUser._doc.password;
     return res.status(201).json({
       success: true,
       user: newUser,
