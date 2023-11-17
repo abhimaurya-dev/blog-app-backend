@@ -7,15 +7,16 @@ export const createPostController = async (req, res, next) => {
     const userId = req.userId;
     const categoryId = req.body.categoryId;
 
-    const isCategoryValid = await Category.findById({ _id: categoryId });
-    if (!isCategoryValid) {
-      return next(new ErrorHandler("Category not found", 404));
+    if (categoryId) {
+      const isCategoryValid = await Category.findById({ _id: categoryId });
+      if (!isCategoryValid) {
+        return next(new ErrorHandler("Category not found", 404));
+      }
     }
     const { title, content } = req.body;
     const newPost = new Post({
       title,
       content,
-      category: categoryId,
       author: userId,
     });
     await newPost.save();
@@ -24,6 +25,7 @@ export const createPostController = async (req, res, next) => {
       message: "New post created successfully",
     });
   } catch (error) {
+    console.log(error);
     return next(error);
   }
 };
