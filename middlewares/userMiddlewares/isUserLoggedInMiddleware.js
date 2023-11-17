@@ -4,6 +4,7 @@ import ErrorHandler from "../../utils/errorHandler.js";
 export const isUserLoggedIn = async (req, res, next) => {
   try {
     const userAuthToken = req.cookies["jwt-token"];
+    console.log(userAuthToken);
     if (!userAuthToken) {
       return next(new ErrorHandler("Unauthorized access", 401));
     }
