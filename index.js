@@ -18,7 +18,10 @@ const app = express();
 dotenv.config();
 
 const corsOptions = {
-  origin: "*",
+  origin: [
+    "https://blog-app-backend-ruby.vercel.app/",
+    "http://localhost:5173",
+  ],
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
