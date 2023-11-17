@@ -19,7 +19,7 @@ dotenv.config();
 
 const corsOptions = {
   origin: [
-    "https://blog-app-frontend-git-main-abhimaurya-dev.vercel.app/",
+    "https://blog-app-frontend-git-main-abhimaurya-dev.vercel.app",
     "http://localhost:5173",
   ],
   credentials: true, //access-control-allow-credentials:true
