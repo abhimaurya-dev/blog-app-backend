@@ -3,6 +3,7 @@ import ErrorHandler from "../../utils/errorHandler.js";
 
 export const isUserLoggedIn = async (req, res, next) => {
   try {
+    console.log(req.headers);
     const userAuthToken = req.headers.authorization.slice(
       7,
       req.headers.authorization.length

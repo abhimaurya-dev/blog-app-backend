@@ -23,7 +23,7 @@ dotenv.config();
 // ];
 
 const corsOptions = {
-  origin: "https://scribblespace.vercel.app",
+  origin: ["https://scribblespace.vercel.app", "http://localhost:5173"],
   credentials: true, //access-control-allow-credentials:true
   allowedHeaders: ["Content-Type", "Authorization"],
   optionSuccessStatus: 200,
