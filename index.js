@@ -19,7 +19,6 @@ dotenv.config();
 
 const corsOptions = {
   origin: [
-    "https://blog-app-frontend-git-main-abhimaurya-dev.vercel.app",
     "https://blog-app-frontend-azure.vercel.app/",
     "http://localhost:5173",
   ],
