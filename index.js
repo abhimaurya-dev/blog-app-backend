@@ -23,7 +23,7 @@ dotenv.config();
 // ];
 
 const corsOptions = {
-  origin: "https://blog-app-frontend-azure.vercel.app/",
+  origin: "https://blog-app-frontend-azure.vercel.app",
   credentials: true, //access-control-allow-credentials:true
   allowedHeaders: ["Content-Type", "Authorization"],
   optionSuccessStatus: 200,
