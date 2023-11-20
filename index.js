@@ -22,16 +22,25 @@ dotenv.config();
 //   "http://localhost:5173",
 // ];
 
-const corsOptions = {
-  origin: "https://blog-app-frontend-azure.vercel.app/",
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
-};
+// const corsOptions = {
+//   origin: "https://blog-app-frontend-azure.vercel.app/",
+//   credentials: true, //access-control-allow-credentials:true
+//   optionSuccessStatus: 200,
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use((req, res, next) => {
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://blog-app-frontend-azure.vercel.app/"
+  ); // Replace with your frontend origin
+  res.header("Access-Control-Allow-Credentials", true);
+  // Add other necessary headers
+  next();
+});
 
 // Using routes
 app.use("/user", userRoutes);
