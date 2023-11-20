@@ -17,11 +17,13 @@ import { errorMiddleware } from "./middlewares/errorHandler/errorMiddleware.js";
 const app = express();
 dotenv.config();
 
+const origin = [
+  "https://blog-app-frontend-azure.vercel.app/",
+  "http://localhost:5173",
+];
+
 const corsOptions = {
-  origin: [
-    "https://blog-app-frontend-azure.vercel.app/",
-    "http://localhost:5173",
-  ],
+  origin,
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
@@ -30,6 +32,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors(corsOptions));
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", origin);
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
 
 // Using routes
 app.use("/user", userRoutes);
