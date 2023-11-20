@@ -22,36 +22,37 @@ dotenv.config();
 //   "http://localhost:5173",
 // ];
 
-// const corsOptions = {
-//   origin: "https://blog-app-frontend-azure.vercel.app/",
-//   credentials: true, //access-control-allow-credentials:true
-//   optionSuccessStatus: 200,
-// };
+const corsOptions = {
+  origin: "https://blog-app-frontend-azure.vercel.app/",
+  credentials: true, //access-control-allow-credentials:true
+  allowedHeaders: ["Content-Type", "Authorization"],
+  optionSuccessStatus: 200,
+};
 
-// app.use(cors(corsOptions));
-const allowedOrigins = [
-  "https://example.com",
-  "https://blog-app-frontend-azure.vercel.app/",
-];
+app.use(cors(corsOptions));
+// const allowedOrigins = [
+//   "https://example.com",
+//   "https://blog-app-frontend-azure.vercel.app/",
+// ];
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
+// app.use((req, res, next) => {
+//   const origin = req.headers.origin;
 
-  if (allowedOrigins.includes(origin)) {
-    res.header(
-      "Access-Control-Allow-Origin",
-      "https://blog-app-frontend-azure.vercel.app/"
-    );
-    res.header("Access-Control-Allow-Credentials", "true");
-    res.header("Access-Control-Allow-Methods", "GET, POST");
-    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    res.sendStatus(200);
-    // Add other necessary headers
-    next();
-  } // Replace with your frontend origin
-});
+//   if (allowedOrigins.includes(origin)) {
+//     res.header(
+//       "Access-Control-Allow-Origin",
+//       "https://blog-app-frontend-azure.vercel.app/"
+//     );
+//     res.header("Access-Control-Allow-Credentials", "true");
+//     res.header("Access-Control-Allow-Methods", "GET, POST");
+//     res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//     res.sendStatus(200);
+//     // Add other necessary headers
+//     next();
+//   } // Replace with your frontend origin
+// });
 
 // Using routes
 app.use("/user", userRoutes);
