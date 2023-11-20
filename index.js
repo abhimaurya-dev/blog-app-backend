@@ -17,10 +17,10 @@ import { errorMiddleware } from "./middlewares/errorHandler/errorMiddleware.js";
 const app = express();
 dotenv.config();
 
-const origin = [
-  "https://blog-app-frontend-azure.vercel.app/",
-  "http://localhost:5173",
-];
+// const origin = [
+//   "https://blog-app-frontend-azure.vercel.app/",
+//   "http://localhost:5173",
+// ];
 
 // const corsOptions = {
 //   origin: "https://blog-app-frontend-azure.vercel.app/",
@@ -33,7 +33,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", origin); // Replace with your frontend origin
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://blog-app-frontend-azure.vercel.app/"
+  ); // Replace with your frontend origin
   res.header("Access-Control-Allow-Credentials", "true");
   res.header("Access-Control-Allow-Methods", "GET, POST");
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
