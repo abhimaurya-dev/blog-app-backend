@@ -17,23 +17,23 @@ import { errorMiddleware } from "./middlewares/errorHandler/errorMiddleware.js";
 const app = express();
 dotenv.config();
 
-const origin = [
-  "https://blog-app-frontend-azure.vercel.app/",
-  "http://localhost:5173",
-];
+// const origin = [
+//   "https://blog-app-frontend-azure.vercel.app/",
+//   "http://localhost:5173",
+// ];
 
 const corsOptions = {
-  origin,
+  origin: "*",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", origin);
+  res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
   res.header("Access-Control-Allow-Headers", "Content-Type");
   res.header("Access-Control-Allow-Credentials", true);
